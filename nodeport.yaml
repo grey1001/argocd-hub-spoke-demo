@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-release-argo-cd-server-nodeport
+  namespace: argo-cd
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/instance: my-release
+    app.kubernetes.io/name: argo-cd
+spec:
+  type: NodePort
+  selector:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/instance: my-release
+    app.kubernetes.io/name: argo-cd
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: http
